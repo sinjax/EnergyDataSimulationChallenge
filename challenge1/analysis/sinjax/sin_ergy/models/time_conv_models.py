@@ -23,7 +23,10 @@ class DeepConvEnergy(Model):
             return
         output = input = Input(shape=(ndays, input_size))
         output = Conv1D(nfilters,filterwidth,input_shape=(ndays,input_size))(output)
-        output = Flatten()(output)
+        doutput = output = Flatten()(output)
+        # doutput = Dense(100,activation='relu')(doutput)
+        doutput = Dense(10,activation='sigmoid')(doutput)
+        output = merge([output,doutput],mode='concat')
         output = Dense(1)(output)
 
         super().__init__(input=input, output=output)
