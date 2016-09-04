@@ -1,0 +1,23 @@
+class_name: LinearEnergy
+config:
+  input_layers:
+  - [input_28, 0, 0]
+  layers:
+  - class_name: InputLayer
+    config:
+      batch_input_shape: !!python/tuple [null, 3]
+      input_dtype: float32
+      name: input_28
+    inbound_nodes: []
+    name: input_28
+  - class_name: Dense
+    config: {W_constraint: null, W_regularizer: null, activation: linear, activity_regularizer: null,
+      b_constraint: null, b_regularizer: null, bias: true, init: glorot_uniform, input_dim: null,
+      name: dense_88, output_dim: 1, trainable: true}
+    inbound_nodes:
+    - - [input_28, 0, 0]
+    name: dense_88
+  name: linearenergy_8
+  output_layers:
+  - [dense_88, 0, 0]
+keras_version: 1.0.8

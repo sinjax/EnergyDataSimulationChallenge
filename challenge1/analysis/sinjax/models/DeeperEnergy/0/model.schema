@@ -1,0 +1,51 @@
+class_name: DeeperEnergy
+config:
+  input_layers:
+  - [input_1, 0, 0]
+  layers:
+  - class_name: InputLayer
+    config:
+      batch_input_shape: !!python/tuple [null, 3]
+      input_dtype: float32
+      name: input_1
+    inbound_nodes: []
+    name: input_1
+  - class_name: Dense
+    config: {W_constraint: null, W_regularizer: null, activation: relu, activity_regularizer: null,
+      b_constraint: null, b_regularizer: null, bias: true, init: glorot_uniform, input_dim: null,
+      name: dense_1, output_dim: 100, trainable: true}
+    inbound_nodes:
+    - - [input_1, 0, 0]
+    name: dense_1
+  - class_name: Dense
+    config: {W_constraint: null, W_regularizer: null, activation: relu, activity_regularizer: null,
+      b_constraint: null, b_regularizer: null, bias: true, init: glorot_uniform, input_dim: null,
+      name: dense_2, output_dim: 10, trainable: true}
+    inbound_nodes:
+    - - [dense_1, 0, 0]
+    name: dense_2
+  - class_name: Dense
+    config: {W_constraint: null, W_regularizer: null, activation: relu, activity_regularizer: null,
+      b_constraint: null, b_regularizer: null, bias: true, init: glorot_uniform, input_dim: null,
+      name: dense_3, output_dim: 100, trainable: true}
+    inbound_nodes:
+    - - [dense_2, 0, 0]
+    name: dense_3
+  - class_name: Merge
+    config: {concat_axis: -1, dot_axes: -1, mode: concat, mode_type: raw, name: merge_1,
+      output_shape: null, output_shape_type: raw}
+    inbound_nodes:
+    - - [input_1, 0, 0]
+      - [dense_3, 0, 0]
+    name: merge_1
+  - class_name: Dense
+    config: {W_constraint: null, W_regularizer: null, activation: linear, activity_regularizer: null,
+      b_constraint: null, b_regularizer: null, bias: true, init: glorot_uniform, input_dim: null,
+      name: dense_4, output_dim: 1, trainable: true}
+    inbound_nodes:
+    - - [merge_1, 0, 0]
+    name: dense_4
+  name: deeperenergy_1
+  output_layers:
+  - [dense_4, 0, 0]
+keras_version: 1.0.8

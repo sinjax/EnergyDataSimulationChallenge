@@ -1,0 +1,51 @@
+class_name: ConvEnergy
+config:
+  input_layers:
+  - [input_51, 0, 0]
+  layers:
+  - class_name: InputLayer
+    config:
+      batch_input_shape: !!python/tuple [null, 12, 3]
+      input_dtype: float32
+      name: input_51
+    inbound_nodes: []
+    name: input_51
+  - class_name: Convolution1D
+    config:
+      W_constraint: null
+      W_regularizer: null
+      activation: linear
+      activity_regularizer: null
+      b_constraint: null
+      b_regularizer: null
+      batch_input_shape: !!python/tuple [null, 12, 3]
+      bias: true
+      border_mode: valid
+      filter_length: 3
+      init: uniform
+      input_dim: null
+      input_dtype: float32
+      input_length: null
+      name: convolution1d_11
+      nb_filter: 5
+      subsample_length: 1
+      trainable: true
+    inbound_nodes:
+    - - [input_51, 0, 0]
+    name: convolution1d_11
+  - class_name: Flatten
+    config: {name: flatten_11, trainable: true}
+    inbound_nodes:
+    - - [convolution1d_11, 0, 0]
+    name: flatten_11
+  - class_name: Dense
+    config: {W_constraint: null, W_regularizer: null, activation: linear, activity_regularizer: null,
+      b_constraint: null, b_regularizer: null, bias: true, init: glorot_uniform, input_dim: null,
+      name: dense_111, output_dim: 1, trainable: true}
+    inbound_nodes:
+    - - [flatten_11, 0, 0]
+    name: dense_111
+  name: convenergy_11
+  output_layers:
+  - [dense_111, 0, 0]
+keras_version: 1.0.8
